@@ -8,7 +8,6 @@ def main():
     
     # Split contents into words and count them
     words = file_contents.split()
-    print(len(words))
     
     # Count the frequency of each letter
     char_count = {}
@@ -19,6 +18,19 @@ def main():
                 char_count[lower_case] = 1 # First occurence of letter
             else:
                 char_count[lower_case] += 1 # Increment existing count
-    print(char_count)
+
+    char_list = []
+    for char in char_count:
+        char_list.append({"char" : char, "num" : char_count[char]}) # Append a dictionary with character and its count
+    
+    char_list.sort(key=lambda x: x["num"], reverse=True) # Sort the list of dictionaries by the 'num' key in descending order
+
+    print(f"\n--- Begin report of books/frankenstein.txt ---\n")
+    print(f"{len(words)} words found in the document\n") # Print the total number of words in the document
+
+    for item in char_list: 
+        print(f"The '{item['char']}' character was found {item['num']} times") # Print each character's frequency in a formatted string
+
+    print("\n--- End Report ---\n")
 
 main()
